@@ -4,6 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -17,11 +20,14 @@ public class BaseTest {
     public String url = "https://qa.koel.app/";
     @BeforeSuite
     static void setupClass() {
+
         WebDriverManager.chromedriver().setup();
+
+
     }
 
     @BeforeMethod
-    public void launchBrowser(){
+    public void launchBrowser() throws InterruptedException {
         //      Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -29,6 +35,10 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         //driver.manage().window().maximize();
+
+
+
+
     }
 
     @AfterMethod
@@ -62,8 +72,12 @@ public class BaseTest {
 
     public void loginToKoel() {
         navigateToPage();
-        provideEmail("demo@testpro.io");
-        providePassword("te$t$tudent");
+        provideEmail("alina.nikolaienko@testpro.io");
+        //provideEmail("demo@testpro.io");
+        providePassword("OPJKDUhA");
+        //providePassword("te$t$tudent");
+        //WebDriverWait wait = new WebDriverWait(driver, 10);
+        //WebElement submitButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type = 'submit']")));
         clickSubmitButton();
     }
 
